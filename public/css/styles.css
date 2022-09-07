@@ -473,6 +473,12 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+a {
+  -webkit-text-decoration-color: #5b21b6;
+          text-decoration-color: #5b21b6;
+  text-decoration-thickness: 2px;
+}
+
 h1 {
   margin: 0px;
   text-align: center;
@@ -996,4 +1002,13 @@ label {
 
 .pt-8 {
   padding-top: 2rem;
+}
+
+.decoration-violet-800 {
+  -webkit-text-decoration-color: #5b21b6;
+          text-decoration-color: #5b21b6;
+}
+
+.decoration-2 {
+  text-decoration-thickness: 2px;
 }

@@ -11,6 +11,10 @@
         @apply mb-3 mt-4 lg:mt-8 font-extrabold text-left text-violet-900;
     }
 
+    a {
+        @apply decoration-2 decoration-violet-800;
+    }
+
     h1 {
         @apply text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center text-white m-0;
     }

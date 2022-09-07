@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Halloween Trick or Treat Sender</title>
+    <title>Halloween Trick-or-Treat Sender</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
 <header>
-    <h1>Halloween Trick or Treat Sender</h1>
+    <h1>Halloween Trick-or-Treat Sender</h1>
 </header>
 <main>
     <section class="pt-8">
@@ -27,6 +27,11 @@
           method="post"
           action="/">
 
+        {% if errors is defined %}
+            <div class="error">
+                There are one or more issues with the information you supplied.
+            </div>
+        {% endif %}
 
         <div id="pick-an-image">
             <h2>1. Pick Your Image</h2>
@@ -34,114 +39,25 @@
                 <div class="error">Please pick an image</div>
             {% endif %}
             <div class="images-wrapper">
-                <div class="image-container">
-                    <input type="radio"
-                           name="image"
-                           class="image-choice">
-                    <img src="/images/emoji-vampire.png"
-                         alt="Emoji Vampire"
-                         class="my-auto">
-                    <div class="image-label">Emoji Vampire</div>
-                </div>
-                <div class="image-container">
-                    <input type="radio"
-                           name="image"
-                           class="image-choice">
-                    <img src="/images/ghost.png"
-                         alt="Ghost"
-                         class="my-auto">
-                    <div class="image-label">Ghost</div>
-                </div>
-                <div class="image-container">
-                    <input type="radio"
-                           name="image"
-                           class="image-choice">
-                    <img src="/images/halloween_jack-olantern.png"
-                         alt="Halloween Jack O'lantern"
-                         class="my-auto">
-                    <div class="image-label">Halloween Jack O'lantern</div>
-                </div>
-                <div class="image-container">
-                    <input type="radio"
-                           name="image"
-                           class="image-choice">
-                    <img src="/images/halloween-scene.png"
-                         alt="Halloween Scene"
-                         class="my-auto">
-                    <div class="image-label">Halloween Scene</div>
-                </div>
-                <div class="image-container">
-                    <input type="radio"
-                           name="image"
-                           class="image-choice">
-                    <img src="/images/happy-halloween.png"
-                         alt="Happy Halloween"
-                         class="my-auto">
-                    <div class="image-label">Happy Halloween</div>
-                </div>
-                <div class="image-container">
-                    <input type="radio"
-                           name="image-choice"
-                           class="image-choice">
-                    <img src="/images/happy-halloween-2.png"
-                         alt="Happy Halloween 2"
-                         class="my-auto">
-                    <div class="image-label">Happy Halloween 2</div>
-                </div>
-                <div class="image-container">
-                    <input type="radio"
-                           name="image"
-                           class="image-choice">
-                    <img src="/images/jack-olantern.png"
-                         alt="Jack O'Lantern"
-                         class="my-auto">
-                    <div class="image-label">Jack O'Lantern</div>
-                </div>
-                <div class="image-container">
-                    <input type="radio"
-                           name="image"
-                           class="image-choice">
-                    <img src="/images/jack-o-lantern-pv.png"
-                         alt="Jack O'Lantern (PV)"
-                         class="my-auto">
-                    <div class="image-label">Jack O'Lantern (PV)</div>
-                </div>
-                <div class="image-container">
-                    <input type="radio"
-                           name="image"
-                           class="image-choice">
-                    <img src="/images/kid-vampire.png"
-                         alt="Kid Vampire"
-                         class="my-auto">
-                    <div class="image-label">Kid Vampire</div>
-                </div>
-                <div class="image-container">
-                    <input type="radio"
-                           name="image"
-                           class="image-choice">
-                    <img src="/images/spooky-jack-olantern.png"
-                         alt="A Spooky Jack O'Lantern"
-                         class="my-auto">
-                    <div class="image-label">A Spooky Jack O'Lantern</div>
-                </div>
-                <div class="image-container">
-                    <input type="radio"
-                           name="image"
-                           class="image-choice">
-                    <img src="/images/trick-or-treat.png"
-                         alt="Trick or Treat"
-                         class="my-auto">
-                    <div class="image-label">Trick or Treat</div>
-                </div>
-                <div class="image-container">
-                    <input type="radio"
-                           name="image"
-                           class="image-choice">
-                    <img src="/images/vampire.png"
-                         alt="The Vampire"
-                         class="my-auto">
-                    <div class="image-label">The Vampire</div>
-                </div>
+                {% for image in images %}
+                    <div class="image-container">
+                        <input type="radio"
+                               id="pick-an-image-{{ image.label }}"
+                               name="image"
+                               value="{{ image.label }}"
+                               class="image-choice"
+                        {% if values.image == image.label %}
+                            checked="checked"
+                        {% endif %}
+                        >
+                        <label for="pick-an-image-{{ image.label }}">
+                            <img src="/images/{{ image.image }}"
+                                alt="{{ image.name }} image"
+                                class="my-auto hover:cursor-pointer">
+                        </label>
+                        <div class="image-label">{{ image.label }}</div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
 
@@ -151,8 +67,9 @@
                 {% if errors.message is defined %}
                     <div class="error">Please write a message for your friend</div>
                 {% endif %}
+                <div class="mb-3">The message can be up to 320 characters in length.</div>
                 <textarea name="message"
-                          rows="10"
+                          rows="5"
                           placeholder="Write your spooky message">{{ values.message }}</textarea>
             </div>
         </div>
@@ -161,7 +78,7 @@
             <h2>3. Choose Your Friend</h2>
             <div>
                 {% if errors.phone_number is defined %}
-                    <div class="error">Please enter your friend's phone number</div>
+                    <div class="error">Please enter your friend's phone number in E.164 format (eg., +14155552671).</div>
                 {% endif %}
                 <div class="choose-your-friend-container">
                     <label for="phone-number">Your Friend's Phone Number</label>
@@ -169,6 +86,7 @@
                         type="tel"
                         name="phone_number"
                         id="phone-number"
+                        placeholder="ex. +14155552671"
                         value="{{ values.phone_number }}">
                 </div>
             </div>

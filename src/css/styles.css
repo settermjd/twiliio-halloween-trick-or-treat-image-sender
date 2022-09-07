@@ -4,7 +4,7 @@
 
 @layer base {
     body {
-        @apply mb-4 sm:mb-6 lg:mb-20 xl:mb-28 bg-white text-slate-700 bg-amber-300 antialiased text-base bg-gradient-to-b from-amber-300 to-amber-400;
+        @apply mb-4 sm:mb-6 lg:mb-20 xl:mb-28 bg-white text-slate-700 bg-amber-300 antialiased text-base;
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -12,7 +12,7 @@
     }
 
     a {
-        @apply decoration-2 decoration-violet-800;
+        @apply decoration-4 decoration-violet-400 underline hover:decoration-violet-800 transition duration-150 ease-in-out;
     }
 
     h1 {
@@ -72,7 +72,7 @@
     }
 
     .error {
-        @apply py-4 pl-3 mb-2 rounded-md bg-red-300 text-red-900 font-bold;
+        @apply py-4 pl-3 mb-2 drop-shadow-md rounded-md bg-red-600 text-red-900 font-bold text-white;
     }
 
     #pick-an-image, #write-your-message, #choose-your-friend {
@@ -93,8 +93,12 @@
         @apply border-4 border-amber-300 rounded-md pt-2 pb-4 px-4 bg-amber-200 hover:border-amber-500 hover:bg-amber-300 hover:drop-shadow-md transition duration-150 ease-in-out hover:cursor-pointer flex justify-center flex-col pt-4;
     }
 
+    .selected {
+        @apply border-amber-500 bg-amber-300 drop-shadow-md;
+    }
+
     .image-label {
-        @apply text-center flex-none py-3 text-white bg-violet-500 border-4 border-purple-800 mt-4;
+        @apply text-center flex-none py-3 text-white bg-violet-600 border-4 border-purple-800 mt-4;
     }
 
     .image-choice {
@@ -119,5 +123,10 @@
 
     .copyright {
         @apply text-center text-slate-600;
+    }
+
+    .input-error,
+    input[type=tel].input-error {
+        @apply border-red-500 bg-red-100 hover:border-red-300;
     }
 }

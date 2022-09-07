@@ -1,6 +1,7 @@
 module.exports = {
   content: [
-    './public/**/*.html'
+    './public/**/*.html',
+    './src/**/*.html.twig'
   ],
   theme: {
     extend: {

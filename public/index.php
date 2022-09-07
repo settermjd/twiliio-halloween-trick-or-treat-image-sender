@@ -167,8 +167,8 @@ $app->add(TwigMiddleware::create(
 $app->map(['GET'], '/thank-you',
     function (Request $request, Response $response, array $args)
     {
-        $view = Twig::fromRequest($request);
-        return $view->render($response, 'thank-you.html.twig', []);
+        return Twig::fromRequest($request)
+            ->render($response, 'thank-you.html.twig', []);
     }
 );
 
@@ -205,7 +205,7 @@ $app->map(['GET','POST'], '/',
                     );
 
                 return $response
-                    ->withHeader('Location', '/')
+                    ->withHeader('Location', '/thank-you')
                     ->withStatus(302);
             }
         }

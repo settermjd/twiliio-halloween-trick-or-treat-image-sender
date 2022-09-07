@@ -88,62 +88,62 @@ $container->set('images', function (): array {
         [
             'name' => 'Emoji Vampire',
             'label' => 'emoji-vampire',
-            'image' => 'emoji-vampire.png'
+            'image' => $_SERVER["IMAGE_URL_BASE"] . '/emoji-vampire.png'
         ],
         [
             'name' => 'Ghost',
             'label' => 'ghost',
-            'image' => 'ghost.png'
+            'image' => $_SERVER["IMAGE_URL_BASE"] . '/ghost.png'
         ],
         [
             'name' => 'Halloween Jack O\'lantern',
             'label' => 'halloween-jack-olantern',
-            'image' => 'halloween_jack-olantern.png'
+            'image' => $_SERVER["IMAGE_URL_BASE"] . '/halloween_jack-olantern.png'
         ],
         [
             'name' => 'Halloween Scene',
             'label' => 'halloween-scene',
-            'image' => 'halloween-scene.png'
+            'image' => $_SERVER["IMAGE_URL_BASE"] . '/halloween-scene.png'
         ],
         [
             'name' => 'Happy Halloween 2',
             'label' => 'happy-halloween-2',
-            'image' => 'happy-halloween-2.png'
+            'image' => $_SERVER["IMAGE_URL_BASE"] . '/happy-halloween-2.png'
         ],
         [
             'name' => 'Happy Halloween',
             'label' => 'happy-halloween',
-            'image' => 'happy-halloween.png'
+            'image' => $_SERVER["IMAGE_URL_BASE"] . '/happy-halloween.png'
         ],
         [
             'name' => 'Jack O\'Lantern',
             'label' => 'jack-olantern',
-            'image' => 'jack-olantern.png'
+            'image' => $_SERVER["IMAGE_URL_BASE"] . '/jack-olantern.png'
         ],
         [
             'name' => 'Jack O\'Lantern (PV)',
             'label' => 'jack-olantern-pv',
-            'image' => 'jack-o-lantern-pv.png'
+            'image' => $_SERVER["IMAGE_URL_BASE"] . '/jack-o-lantern-pv.png'
         ],
         [
             'name' => 'Kid Vampire',
             'label' => 'kid-vampire',
-            'image' => 'kid-vampire.png'
+            'image' => $_SERVER["IMAGE_URL_BASE"] . '/kid-vampire.png'
         ],
         [
             'name' => 'A Spooky Jack O\'Lantern',
             'label' => 'spooky-jack-olantern',
-            'image' => 'spooky-jack-olantern.png'
+            'image' => $_SERVER["IMAGE_URL_BASE"] . '/spooky-jack-olantern.png'
         ],
         [
             'name' => 'Trick or Treat',
             'label' => 'trick-or-treat',
-            'image' => 'trick-or-treat.png'
+            'image' => $_SERVER["IMAGE_URL_BASE"] . '/trick-or-treat.png'
         ],
         [
             'name' => 'The Vampire',
             'label' => 'the-vampire',
-            'image' => 'vampire.png'
+            'image' => $_SERVER["IMAGE_URL_BASE"] . '/vampire.png'
         ],
     ];
 });
@@ -195,11 +195,11 @@ $app->map(['GET','POST'], '/',
                             "body" => $inputFilter->getValue('message'),
                             "from" => $_SERVER['TWILIO_PHONE_NUMBER'],
                             "mediaUrl" => [
-                                /*
-                                 * @todo Either store the images on a CDN or similar, or make the app
-                                 * globally available using ngrok or similar.
-                                 */
-                                "http://localhost:8000/images/" . $inputFilter->getValue('image')
+                                sprintf(
+                                    '%s/%s.png',
+                                    $_SERVER["IMAGE_URL_BASE"],
+                                    $inputFilter->getValue('image')
+                                )
                             ]
                         ]
                     );

@@ -1,5 +1,5 @@
 {
-  "name": "Suzanne Stays",
+  "name": "Halloween Trick-or-Treat Sender",
   "version": "1.0.0",
   "description": "",
   "main": "",
@@ -9,7 +9,7 @@
     "dev-css": "npx tailwindcss -i ./src/css/styles.css -o src/css/styles.css",
     "prod-css": "NODE_ENV=production npx tailwindcss -i ./src/css/styles.css -o src/css/styles.min.css --minify"
   },
-  "author": "",
+  "author": "Matthew Setter",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.15.4",

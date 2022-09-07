@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Halloween Trick-or-Treat Sender</title>
-    <link rel="stylesheet" href="/css/styles.css">
-</head>
-<body>
-<header>
-    <h1>Halloween Trick-or-Treat Sender</h1>
-</header>
-<main>
+{% extends "base.html.twig" %}
+
+{% block content %}
     <section class="pt-8">
         <h2>Want to Scare Your Friends on Halloween?</h2>
         <div class="lead">
@@ -28,7 +19,7 @@
           action="/">
 
         {% if errors is defined %}
-            <div class="error">
+            <div class="error text-center text-xl mb-8">
                 There are one or more issues with the information you supplied.
             </div>
         {% endif %}
@@ -40,20 +31,28 @@
             {% endif %}
             <div class="images-wrapper">
                 {% for image in images %}
-                    <div class="image-container">
+                    <div
+                            {% if values.image == image.label %}
+                                class="image-container selected"
+                            {% else %}
+                                class="image-container"
+                            {% endif %}
+                    >
                         <input type="radio"
                                id="pick-an-image-{{ image.label }}"
                                name="image"
                                value="{{ image.label }}"
-                               class="image-choice"
-                        {% if values.image == image.label %}
-                            checked="checked"
-                        {% endif %}
+                                {% if values.image == image.label %}
+                                    class="image-choice"
+                                    checked="checked"
+                                {% else %}
+                                    class="image-choice"
+                                {% endif %}
                         >
                         <label for="pick-an-image-{{ image.label }}">
-                            <img src="/images/{{ image.image }}"
-                                alt="{{ image.name }} image"
-                                class="my-auto hover:cursor-pointer">
+                            <img src="{{ image.image }}"
+                                 alt="{{ image.name }} image"
+                                 class="hover:cursor-pointer">
                         </label>
                         <div class="image-label">{{ image.label }}</div>
                     </div>
@@ -67,10 +66,14 @@
                 {% if errors.message is defined %}
                     <div class="error">Please write a message for your friend</div>
                 {% endif %}
-                <div class="mb-3">The message can be up to 320 characters in length.</div>
                 <textarea name="message"
                           rows="5"
-                          placeholder="Write your spooky message">{{ values.message }}</textarea>
+                          placeholder="Write your spooky message"
+                {% if errors.message is defined %}
+                    class="input-error"
+                {% endif %}
+                >{{ values.message }}</textarea>
+                <div class="mt-1 pl-1 text-slate-600">The message can be up to 320 characters in length.</div>
             </div>
         </div>
 
@@ -81,13 +84,20 @@
                     <div class="error">Please enter your friend's phone number in E.164 format (eg., +14155552671).</div>
                 {% endif %}
                 <div class="choose-your-friend-container">
-                    <label for="phone-number">Your Friend's Phone Number</label>
-                    <input
-                        type="tel"
-                        name="phone_number"
-                        id="phone-number"
-                        placeholder="ex. +14155552671"
-                        value="{{ values.phone_number }}">
+                    <label class="font-bold" for="phone-number">Your Friend's Phone Number:</label>
+                    <div>
+                        <input type="tel"
+                               name="phone_number"
+                               id="phone-number"
+                               placeholder="ex. +14155552671"
+                               {% if errors.phone_number is defined %}
+                                   class="input-error"
+                               {% endif %}
+                               value="{{ values.phone_number }}">
+                        <div class="mt-1 pl-1 text-slate-600">
+                            The phone number must be in <a href="https://www.twilio.com/docs/glossary/what-e164">E.164 format</a>.
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -103,9 +113,4 @@
                    value="Cancel">
         </div>
     </form>
-</main>
-<footer>
-    <div class="copyright">copyright &copy; Matthew Setter 2022.</div>
-</footer>
-</body>
-</html>
+{% endblock %}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}Halloween Trick-or-Treat Sender</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon"
+          type="image/png"
+          href="/images/favicon.png">
+</head>
+<body>
+<header>
+    <h1>{% block h1_header %}{% endblock %}Halloween Trick-or-Treat Sender</h1>
+</header>
+<main id="app">
+        {% block content %}
+        {% endblock %}
+</main>
+<footer>
+    <div class="copyright">copyright &copy; Matthew Setter 2022.</div>
+</footer>
+<script src="https://unpkg.com/vue@3"></script>
+<script>
+    const { createApp } = Vue
+
+    createApp({
+        data() {
+            return {
+                message: 'Hello Vue!'
+            }
+        }
+    }).mount('#app')
+</script>
+</body>
+</html>
